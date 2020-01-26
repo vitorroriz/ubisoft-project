@@ -39,7 +39,7 @@
   body { 
       background-color: black;
       padding: 0;
-      margin: 0;
+      margin: 5px;
       height: 100vh;
   }
 
@@ -55,6 +55,7 @@
   .logo {
       width: 25px;
       height: 25px;
+      margin: 0 2px;
   }
 
   #main {
@@ -62,4 +63,8 @@
       border-width: 2px;
       border-style: solid;
       min-height: 92vh;
+  }
+
+  .letter-button {
+      margin: 0 2px;
   }
