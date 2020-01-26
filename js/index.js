@@ -21,12 +21,14 @@ Vue.component('letter-button', {
      */
     data: function() {
         return {
-            hide: false
+            hide: false,
+            letterVal: this.letter.text
         }
     },
     methods: {
         button_update: function() {
             this.hide = true;
+            game.check_letter(this.letterVal);
         }
     }
 }
@@ -36,12 +38,29 @@ var game = new Vue ({
     el: "#game",
     data: {
         letterList: [/*{id:0, text:"", hide:false}*/],
-        wordToGuess: "",
+        wordToGuess: "abacate",
         triesLeft: 6
     },
     methods: {
-        button_update: function() {
+        button_update: function(letter) {
             hide = true;
+        },
+        check_letter: function(guess) {
+            var reg = new RegExp(guess,'i');
+            if(this.wordToGuess.match(reg)) {
+                this.reveal_letter();
+            } else {
+                this.triesLeft--;
+                if(this.triesLeft <= 0) {
+                    this.game_over();
+                }
+            }
+        },
+        game_over: function() {
+            console.log("game over!");
+        },
+        reveal_letter: function() {
+            console.log("show a letter");
         }
     } 
 });
