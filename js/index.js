@@ -58,7 +58,6 @@ var game = new Vue ({
         letterList: [/*{id:0, text:"", hide:false}*/],
         wordToGuess: "super mario",
         displayVector: [],  
-//        displayVector: [],
         triesLeft: 6,
         startButtonMsg: "Play!"
     },
@@ -99,12 +98,9 @@ var game = new Vue ({
         }
     },
     created: function() {
-        
+        this.$on('letter-input', this.check_letter);
     }
 });
-
-/* Game events */
-game.$on('letter-input', game.check_letter);
 
 const LETTERS_IN_ALPHABET = 26;
 const FIRST_LETTER_CODE = 65;
