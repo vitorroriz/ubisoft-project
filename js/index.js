@@ -33,7 +33,8 @@ Vue.component('letter-button', {
     methods: {
         button_update: function() {
             this.hide = true;
-            game.check_letter(this.letterVal);
+            //game.check_letter(this.letterVal);
+            this.$parent.$emit('letter-input', this.letterVal);
         }
     }
 });
@@ -43,7 +44,7 @@ Vue.component('letter-display', {
     template: '<div class="word-display">{{letter.text == 32 ? " " : letter.text}}</div>'
 });
 
-window.game = new Vue ({
+var game = new Vue ({
     el: "#game",
     data: {
         letterList: [/*{id:0, text:"", hide:false}*/],
@@ -56,7 +57,7 @@ window.game = new Vue ({
     methods: {
         start_button: function() {
             this.startButtonMsg = "Restart";
-            this.displayVector = [];
+            this.displayVector.splice(0, this.displayVector.length);
             for(var i = 0; i < this.wordToGuess.length; i++) {
                 if(this.wordToGuess.charAt(i) == " ")
                     Vue.set(this.displayVector, i, {id:'dv'+i, text:32});
@@ -92,6 +93,9 @@ window.game = new Vue ({
         
     }
 });
+
+/* Game events */
+game.$on('letter-input', game.check_letter);
 
 const LETTERS_IN_ALPHABET = 26;
 const FIRST_LETTER_CODE = 65;
