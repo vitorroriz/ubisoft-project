@@ -24,8 +24,8 @@
            <letter-button
                 v-for="item in letterList"
                 v-bind:letter="item"
-                v-bind:key="item.id" ></letter-button> 
-           <span>{{triesLeft}}</span><br>
+                v-bind:key="item.id" ></letter-button><br>
+           <span> Left tries: {{triesLeft}}</span><br>
            <letter-display
                 v-for="item in displayVector"
                 v-bind:letter="item"

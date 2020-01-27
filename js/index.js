@@ -16,34 +16,48 @@ function get_indices_of(str, charToFind)
     return ret;
 }
 
+function n_distinct_chars(word) {
+    var distinct = new Set();
+    for (let index = 0; index < word.length; index++) {
+        let c = word.charAt(index); 
+        if(c != " ")
+            distinct.add(c);
+    }
+    return distinct.size;
+}
+
 window.onload = function() {
 
 Vue.component('letter-button', {
     props: ['letter'],
-    template: '<button v-bind:disabled="hide" v-on:click="button_update" class="letter-button">{{letter.text}}</button>',
+    template: '<button v-bind:disabled="disabled" v-on:click="button_update" class="letter-button">{{letter.text}}</button>',
     /* data has to be a function in component, so each instance of the 
      * componente can have its own returned data
      */
     data: function() {
         return {
-            hide: true,
+            disabled: true,
             letterVal: this.letter.text
         }
     },
     methods: {
         button_update: function() {
-            this.hide = true;
+            this.disabled = true;
             //game.check_letter(this.letterVal);
             this.$parent.$emit('letter-input', this.letterVal);
         },
-
         restart: function() {
-            this.hide = false;
+            this.disabled = false;
+        },
+        game_over: function() {
+            this.disabled = true;
         }
     },
 
     created: function(){
+        /* Event listeners (uses parent as event bus) */
         this.$parent.$on('start-button', this.restart);
+        this.$parent.$on('game-over', this.game_over);
     }
 });
 
@@ -55,11 +69,12 @@ Vue.component('letter-display', {
 var game = new Vue ({
     el: "#game",
     data: {
-        letterList: [/*{id:0, text:"", hide:false}*/],
+        letterList: [/*{id:0, text:"", disabled:false}*/],
         wordToGuess: "super mario",
         displayVector: [],  
         MAX_TRIES: 6,
         triesLeft: 6,
+        nLettersLeftToWin: 10,
         startButtonMsg: "Play!",
         wordsList: [
             "super mario",
@@ -67,13 +82,14 @@ var game = new Vue ({
             "assassins creed",
             "the settlers",
             "anno"
-        ]
+        ],
     },
     methods: {
         start_button: function() {
             this.startButtonMsg = "Restart";
             this.wordToGuess = this.get_random_word();
-            this.displayVector.splice(0, this.displayVector.length);
+            this.nLettersLeftToWin = n_distinct_chars(this.wordToGuess);
+            this.clear_display();
             for(var i = 0; i < this.wordToGuess.length; i++) {
                 if(this.wordToGuess.charAt(i) == " ")
                     Vue.set(this.displayVector, i, {id:'dv'+i, text:32});
@@ -84,12 +100,18 @@ var game = new Vue ({
             this.$emit('start-button');
         },
         button_update: function(letter) {
-            hide = true;
+            disabled = true;
         },
         check_letter: function(guess) {
             var indices = get_indices_of(this.wordToGuess, guess);
             if(indices.length > 0) {
                 this.reveal_letter(indices, guess);
+                this.nLettersLeftToWin--;
+                if(this.nLettersLeftToWin <= 0) {
+                    //user has won the game
+                    console.log("you won!!!!")
+                    this.$emit('game-over');
+                }
             } else {
                 this.triesLeft--;
                 if(this.triesLeft <= 0) {
@@ -99,7 +121,8 @@ var game = new Vue ({
         },
         game_over: function() {
             console.log("game over!");
-            this.displayVector.splice(0, this.displayVector.length);
+            //this.clear_display();
+            this.$emit('game-over');
         },
         reveal_letter: function(indices, letter) {
             for(var i = 0; i < indices.length; i++) {
@@ -109,18 +132,22 @@ var game = new Vue ({
         get_random_word() {
             var index = Math.floor((Math.random() * this.wordsList.length));
             return this.wordsList[index];
+        },
+        clear_display() {
+            this.displayVector.splice(0, this.displayVector.length);
         }
     },
     created: function() {
-        this.$on('letter-input', this.check_letter);
         this.triesLeft = this.MAX_TRIES;
+        /* Event listeners (game is used as event bus by children) */
+        this.$on('letter-input', this.check_letter);
     }
 });
 
 const LETTERS_IN_ALPHABET = 26;
 const FIRST_LETTER_CODE = 65;
 for(var i = 0; i < LETTERS_IN_ALPHABET; ++i) {
-    game.letterList.push({id:i, text:String.fromCharCode(FIRST_LETTER_CODE+i), hide:false});
+    game.letterList.push({id:i, text:String.fromCharCode(FIRST_LETTER_CODE+i), disabled:false});
 }
 
 };
