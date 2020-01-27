@@ -50,6 +50,7 @@
       width: 100vh;
       text-align: left;
       padding-left: 10px;
+      font-size: 16px;
   }
 
   .logo {
@@ -62,7 +63,7 @@
       border-color: white;
       border-width: 2px;
       border-style: solid;
-      min-height: 92vh;
+      min-height: 70vh;
   }
 
   .letter-button {
@@ -73,4 +74,36 @@
       margin-top: 20px;
       font-family: monospace;
       text-decoration-color: rebeccapurple;
+  }
+
+  .word-display {
+      font-size: 60px;
+      border-color: white;
+      border-bottom: 4px;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      border-style: solid;
+      padding: 0;
+      max-width: 100em;
+      display: inline-block;
+      margin: 10px 20px;
+  }
+    .word-not-display {
+      font-size: 60px;
+      border-color: white;
+      border-bottom: 4px;
+      border-top: 0;
+      border-left: 0;
+      border-right: 0;
+      border-style: solid;
+      padding: 0;
+      max-width: 100em;
+      display: inline-block;
+      margin: 10px 20px;
+  }
+
+  #start-button {
+      width: 80px;
+      height: 60px;
   }

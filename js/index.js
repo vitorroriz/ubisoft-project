@@ -1,17 +1,22 @@
 "use strict";
-window.onload = function() {
 
-var startButton = new Vue({
-    el: "#start-button",
-    data: {
-        message: "Play!"
-    }, 
-    methods: {
-        update: function() {
-            this.message = "Restart!";
-        }
+function get_indices_of(str, charToFind)
+{
+    var upperStr = str.toUpperCase();
+    var upperChar = charToFind.toUpperCase();
+
+    var ret = [];
+    if(upperStr.length == 0)
+        return ret;
+    for(var i = 0; i < upperStr.length; ++i) {
+        var c = upperStr.charAt(i);
+        if(c == upperChar)
+            ret.push(i);
     }
-});
+    return ret;
+}
+
+window.onload = function() {
 
 Vue.component('letter-button', {
     props: ['letter'],
@@ -31,24 +36,41 @@ Vue.component('letter-button', {
             game.check_letter(this.letterVal);
         }
     }
-}
-)
+});
 
-var game = new Vue ({
+Vue.component('letter-display', {
+    props: ['letter'],
+    template: '<div class="word-display">{{letter.text == 32 ? " " : letter.text}}</div>'
+});
+
+window.game = new Vue ({
     el: "#game",
     data: {
         letterList: [/*{id:0, text:"", hide:false}*/],
-        wordToGuess: "abacate",
-        triesLeft: 6
+        wordToGuess: "super mario",
+        displayVector: [],  
+//        displayVector: [],
+        triesLeft: 6,
+        startButtonMsg: "Play!"
     },
     methods: {
+        start_button: function() {
+            this.startButtonMsg = "Restart";
+            this.displayVector = [];
+            for(var i = 0; i < this.wordToGuess.length; i++) {
+                if(this.wordToGuess.charAt(i) == " ")
+                    Vue.set(this.displayVector, i, {id:'dv'+i, text:32});
+                else
+                    Vue.set(this.displayVector, i, {id:'dv'+i, text:'?'});
+            }
+        },
         button_update: function(letter) {
             hide = true;
         },
         check_letter: function(guess) {
-            var reg = new RegExp(guess,'i');
-            if(this.wordToGuess.match(reg)) {
-                this.reveal_letter();
+            var indices = get_indices_of(this.wordToGuess, guess);
+            if(indices.length > 0) {
+                this.reveal_letter(indices, guess);
             } else {
                 this.triesLeft--;
                 if(this.triesLeft <= 0) {
@@ -58,11 +80,17 @@ var game = new Vue ({
         },
         game_over: function() {
             console.log("game over!");
+            this.displayVector.splice(0, this.displayVector.length);
         },
-        reveal_letter: function() {
-            console.log("show a letter");
+        reveal_letter: function(indices, letter) {
+            for(var i = 0; i < indices.length; i++) {
+                Vue.set(this.displayVector, [indices[i]], {id:'dv'+indices[i], text:letter});
+            }
         }
-    } 
+    },
+    created: function() {
+        
+    }
 });
 
 const LETTERS_IN_ALPHABET = 26;
