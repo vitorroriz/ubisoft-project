@@ -78,6 +78,8 @@ var game = new Vue ({
         startButtonMsg: "Play!",
         listHangmanImgs: ["sinit.png","s0.png","s1.png","s2.png","s3.png","s4.png","s5.png"],
         imageDisplay:"sinit.png",
+        resultClass:"",
+        resultMsg:"",
         wordsList: [
             "super mario",
             "pokemon",
@@ -100,6 +102,7 @@ var game = new Vue ({
             }
             this.triesLeft = this.MAX_TRIES;
             this.imageDisplay = this.listHangmanImgs[0];
+            this.resultMsg = "";
             this.$emit('start-button');
         },
         button_update: function(letter) {
@@ -112,8 +115,7 @@ var game = new Vue ({
                 this.nLettersLeftToWin--;
                 if(this.nLettersLeftToWin <= 0) {
                     //user has won the game
-                    console.log("you won!!!!")
-                    this.$emit('game-over');
+                    this.game_won();
                 }
             } else {
                 this.triesLeft--;
@@ -127,6 +129,14 @@ var game = new Vue ({
         game_over: function() {
             console.log("game over!");
             //this.clear_display();
+            this.resultClass = "result-gameover";
+            this.resultMsg = "GAME OVER!";
+            this.$emit('game-over');
+        },
+        game_won: function() {
+            console.log("you won!!!!")
+            this.resultClass = "result-gamewon";
+            this.resultMsg = "YOU WON!";
             this.$emit('game-over');
         },
         reveal_letter: function(indices, letter) {

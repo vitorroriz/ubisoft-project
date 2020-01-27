@@ -19,6 +19,7 @@
     &NonBreakingSpace;
     <main id="main">
         <div id="game">
+
            <button id="start-button" v-on:click="start_button">{{startButtonMsg}}</button>
            <br>
            <letter-button
@@ -26,13 +27,14 @@
                 v-bind:letter="item"
                 v-bind:key="item.id" ></letter-button><br>
            <span> Left tries: {{triesLeft}}</span><br>
-            <img class="hangman" v-bind:src="'img/'+imageDisplay" alt="the settlers character"><br>
+            <img class="gallow" src="img/gallow.png" alt="the settlers character"><br>
+            <img class="hangman" v-bind:src="'img/'+imageDisplay" alt="the settlers character">
            <letter-display
                 v-for="item in displayVector"
                 v-bind:letter="item"
                 v-bind:key="item.id"></letter-display>
+            <div v-bind:class="resultClass">{{resultMsg}}</div>
         </div>
-
     </main>
 
 

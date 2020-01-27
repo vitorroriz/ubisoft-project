@@ -88,6 +88,7 @@
       max-width: 100em;
       display: inline-block;
       margin: 10px 20px;
+      margin-top: 200px;
   }
     .word-not-display {
       font-size: 60px;
@@ -101,6 +102,7 @@
       max-width: 100em;
       display: inline-block;
       margin: 10px 20px;
+      margin-top: 350px;
   }
 
   #start-button {
@@ -109,6 +111,23 @@
   }
 
   .hangman {
-      width: 8%;
+      width: 124px;
       height: auto;
+      position: absolute;
+      top: 394px;
+      left: 122px;
+  }
+  .gallow{
+      width: 255px;
+      height: auto;
+      position: absolute;
+      top: 350px;
+      left: 20px;
+
+  }
+  .result-gameover {
+      color: red;
+  }
+  .result-gamewon {
+      color:green;
   }
