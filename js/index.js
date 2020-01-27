@@ -26,7 +26,7 @@ Vue.component('letter-button', {
      */
     data: function() {
         return {
-            hide: false,
+            hide: true,
             letterVal: this.letter.text
         }
     },
@@ -58,12 +58,21 @@ var game = new Vue ({
         letterList: [/*{id:0, text:"", hide:false}*/],
         wordToGuess: "super mario",
         displayVector: [],  
+        MAX_TRIES: 6,
         triesLeft: 6,
-        startButtonMsg: "Play!"
+        startButtonMsg: "Play!",
+        wordsList: [
+            "super mario",
+            "pokemon",
+            "assassins creed",
+            "the settlers",
+            "anno"
+        ]
     },
     methods: {
         start_button: function() {
             this.startButtonMsg = "Restart";
+            this.wordToGuess = this.get_random_word();
             this.displayVector.splice(0, this.displayVector.length);
             for(var i = 0; i < this.wordToGuess.length; i++) {
                 if(this.wordToGuess.charAt(i) == " ")
@@ -71,6 +80,7 @@ var game = new Vue ({
                 else
                     Vue.set(this.displayVector, i, {id:'dv'+i, text:'?'});
             }
+            this.triesLeft = this.MAX_TRIES;
             this.$emit('start-button');
         },
         button_update: function(letter) {
@@ -95,10 +105,15 @@ var game = new Vue ({
             for(var i = 0; i < indices.length; i++) {
                 Vue.set(this.displayVector, [indices[i]], {id:'dv'+indices[i], text:letter});
             }
+        },
+        get_random_word() {
+            var index = Math.floor((Math.random() * this.wordsList.length));
+            return this.wordsList[index];
         }
     },
     created: function() {
         this.$on('letter-input', this.check_letter);
+        this.triesLeft = this.MAX_TRIES;
     }
 });
 
