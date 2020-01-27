@@ -81,11 +81,17 @@ var game = new Vue ({
         resultClass:"",
         resultMsg:"",
         wordsList: [
-            "super mario",
-            "pokemon",
+            "battle isle",
+            "incubation",
             "assassins creed",
             "the settlers",
-            "anno"
+            "anno",
+            "twinworld",
+            "great courts",
+            "atomino",
+            "your shape",
+            "silent hunter",
+            "extreme assault"
         ],
     },
     methods: {
