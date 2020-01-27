@@ -76,6 +76,8 @@ var game = new Vue ({
         triesLeft: 6,
         nLettersLeftToWin: 10,
         startButtonMsg: "Play!",
+        listHangmanImgs: ["sinit.png","s0.png","s1.png","s2.png","s3.png","s4.png","s5.png"],
+        imageDisplay:"sinit.png",
         wordsList: [
             "super mario",
             "pokemon",
@@ -97,6 +99,7 @@ var game = new Vue ({
                     Vue.set(this.displayVector, i, {id:'dv'+i, text:'?'});
             }
             this.triesLeft = this.MAX_TRIES;
+            this.imageDisplay = this.listHangmanImgs[0];
             this.$emit('start-button');
         },
         button_update: function(letter) {
@@ -114,6 +117,8 @@ var game = new Vue ({
                 }
             } else {
                 this.triesLeft--;
+                let listSz = this.listHangmanImgs.length;
+                this.imageDisplay = this.listHangmanImgs[listSz-this.triesLeft-1];
                 if(this.triesLeft <= 0) {
                     this.game_over();
                 }
@@ -139,6 +144,7 @@ var game = new Vue ({
     },
     created: function() {
         this.triesLeft = this.MAX_TRIES;
+        this.imageDisplay = this.listHangmanImgs[0];
         /* Event listeners (game is used as event bus by children) */
         this.$on('letter-input', this.check_letter);
     }

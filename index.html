@@ -26,6 +26,7 @@
                 v-bind:letter="item"
                 v-bind:key="item.id" ></letter-button><br>
            <span> Left tries: {{triesLeft}}</span><br>
+            <img class="hangman" v-bind:src="'img/'+imageDisplay" alt="the settlers character"><br>
            <letter-display
                 v-for="item in displayVector"
                 v-bind:letter="item"
