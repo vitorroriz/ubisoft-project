@@ -35,7 +35,15 @@ Vue.component('letter-button', {
             this.hide = true;
             //game.check_letter(this.letterVal);
             this.$parent.$emit('letter-input', this.letterVal);
+        },
+
+        restart: function() {
+            this.hide = false;
         }
+    },
+
+    created: function(){
+        this.$parent.$on('start-button', this.restart);
     }
 });
 
@@ -64,6 +72,7 @@ var game = new Vue ({
                 else
                     Vue.set(this.displayVector, i, {id:'dv'+i, text:'?'});
             }
+            this.$emit('start-button');
         },
         button_update: function(letter) {
             hide = true;
