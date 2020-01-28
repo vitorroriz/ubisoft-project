@@ -1,5 +1,4 @@
 # hangubi
-A hangman game based on a list of games from Ubisoft Blue Byte (Ubisoft Dusseldorf).
 
 This project was created so I can learn some HTML/CSS/JS/VUE.
 
