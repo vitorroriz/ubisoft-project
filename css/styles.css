@@ -1,111 +1,113 @@
-  #start-button {
+#start-button {
+    margin-top: 20px;
     border-radius: 10%;
     font-size: 30px;
     height: auto;
     font-family: monospace;
     font-weight: bold;
-  }
-  #content {
+}
+#content {
     background-color: black;
     min-height: 100vh;
     color: white;
     margin: 0 auto;
     text-align: center;
     position: relative;
-  }
-
-  .header{
+}
+.header{
+    font-family: monospace;
     font-size: 40px;
     font-weight: bold;
-  }
-  
-  body { 
-      background-color: black;
-      padding: 0;
-      margin: 5px;
-      height: 100vh;
-  }
-
-  footer {
-      position: absolute;
-      height: 20px;
-      bottom: 1;
-      width: 100vh;
-      text-align: left;
-      padding-left: 10px;
-      font-size: 36px;
-  }
-
-  .logo {
-      width: 25px;
-      height: 25px;
-      margin: 0 2px;
-  }
-
-  #main {
-      border-color: white;
-      border-width: 2px;
-      border-style: solid;
-      min-height: 85vh;
-  }
-
-  .letter-button {
-      margin: 0 2px;
-      font-size: 30px;
-      width: 40px;
-      height: 40px;
-      margin-top: 20px;
-      font-family: monospace;
-      text-decoration-color: rebeccapurple;
-  }
-
-  .word-display {
-      font-size: 60px;
-      border-color: white;
-      border-bottom: 4px;
-      border-top: 0;
-      border-left: 0;
-      border-right: 0;
-      border-style: solid;
-      padding: 0;
-      max-width: 100em;
-      display: inline-block;
-      margin: 10px 20px;
-      margin-top: 200px;
-  }
-    .word-not-display {
-      font-size: 60px;
-      border-color: white;
-      border-bottom: 4px;
-      border-top: 0;
-      border-left: 0;
-      border-right: 0;
-      border-style: solid;
-      padding: 0;
-      max-width: 100em;
-      display: inline-block;
-      margin: 10px 20px;
-      margin-top: 350px;
-  }
-
-  .hangman {
-      width: 124px;
-      height: auto;
-      position: absolute;
-      top: 394px;
-      left: 122px;
-  }
-  .gallow{
-      width: 255px;
-      height: auto;
-      position: absolute;
-      top: 350px;
-      left: 20px;
-
-  }
-  .result-gameover {
-      color: red;
-  }
-  .result-gamewon {
-      color:green;
-  }
+}
+body { 
+    background-color: black;
+    padding: 0;
+    margin: 5px;
+    height: 100vh;
+}
+footer {
+    margin-top: 10px;
+    position: absolute;
+    height: 20px;
+    width: 100vh;
+    text-align: left;
+    padding-left: 10px;
+    font-size: 25px;
+}
+.logo {
+    width: 30px;
+    height: auto;
+    margin: 0 2px;
+}
+#game {
+    font-family: monospace;
+    border-color: white;
+    border-width: 2px;
+    border-style: solid;
+    min-height: 90vh;
+}
+.letter-button {
+    margin: 0 2px;
+    font-size: 30px;
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+    font-family: monospace;
+    border-radius: 10%;
+}
+.word-display {
+    font-size: 60px;
+    border-color: white;
+    border-bottom: 4px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-style: solid;
+    padding: 0;
+    max-width: 100em;
+    display: inline-block;
+    margin: 10px 20px;
+    margin-top: 200px;
+}
+.word-not-display {
+    font-size: 60px;
+    border-color: white;
+    border-bottom: 4px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-style: solid;
+    padding: 0;
+    max-width: 100em;
+    display: inline-block;
+    margin: 10px 20px;
+    margin-top: 350px;
+}
+.hangman {
+    width: 124px;
+    height: auto;
+    position: absolute;
+    top: 394px;
+    left: 122px;
+}
+.gallow{
+    width: 255px;
+    height: auto;
+    position: absolute;
+    top: 350px;
+    left: 20px;
+}
+.result-gameover {
+    margin-top: 80px;
+    color: red;
+    font-size: 80px;
+}
+.result-gamewon {
+    margin-top: 80px;
+    color:green;
+    font-size: 80px;
+}
+#tries-left {
+    font-size: 20px;
+    margin-top: 10px;
+}

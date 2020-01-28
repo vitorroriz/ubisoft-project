@@ -11,38 +11,30 @@
 </head>
 <body>
 <div id=content>
-    <heade class="header">
+    <header class="header">
         <div>THE HANGUBI GAME</div>
-
     </header>
-
-    &NonBreakingSpace;
-    <main id="main">
-        <div id="game">
-
-           <button class="button" id="start-button" v-on:click="start_button">{{startButtonMsg}}</button>
-           <br>
-           <letter-button
-                v-for="item in letterList"
-                v-bind:letter="item"
-                v-bind:key="item.id" ></letter-button><br>
-           <span> Left tries: {{triesLeft}}</span><br>
-            <img class="gallow" src="img/gallow.png" alt="the settlers character"><br>
-            <img class="hangman" v-bind:src="'img/'+imageDisplay" alt="the settlers character">
-           <letter-display
-                v-for="item in displayVector"
-                v-bind:letter="item"
-                v-bind:key="item.id"></letter-display>
-            <div v-bind:class="resultClass">{{resultMsg}}</div>
-        </div>
-    </main>
-
-
+    <div id="game">
+        <button class="button" id="start-button" v-on:click="start_button">{{startButtonMsg}}</button>
+        <br>
+        <letter-button
+            v-for="item in letterList"
+            v-bind:letter="item"
+            v-bind:key="item.id" ></letter-button>
+        <div id="tries-left"> Left tries: {{triesLeft}}</div>
+        <img class="gallow" src="img/gallow.png" alt="the settlers character"><br>
+        <img class="hangman" v-bind:src="'img/'+imageDisplay" alt="the settlers character">
+        <letter-display
+            v-for="item in displayVector"
+            v-bind:letter="item"
+            v-bind:key="item.id"></letter-display>
+        <div v-bind:class="resultClass">{{resultMsg}}</div>
+    </div>
     <footer>
         &copy; Vitor Roriz  
         <a href="https://www.linkedin.com/in/vitor-roriz-64666a105/"><img class="logo" src="img/LI-In-Bug.png" alt="Linkedln logo"></a> 
         <a href="https://www.github.com/vitorroriz"><img class="logo" src="img/GitHub-Mark-Light-120px-plus.png" alt="github logo"></a>
     </footer>
 </div>
-</body
+</body>
 </html>

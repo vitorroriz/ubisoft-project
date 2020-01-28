@@ -1,11 +1,11 @@
 "use strict";
-
+/* ------ AUXILIAR FUNCTIONS ------ */
 function get_indices_of(str, charToFind)
 {
     var upperStr = str.toUpperCase();
     var upperChar = charToFind.toUpperCase();
-
     var ret = [];
+
     if(upperStr.length == 0)
         return ret;
     for(var i = 0; i < upperStr.length; ++i) {
@@ -27,7 +27,7 @@ function n_distinct_chars(word) {
 }
 
 window.onload = function() {
-
+/* ------ GAME'S COMPONENTS ------ */
 Vue.component('letter-button', {
     props: ['letter'],
     template: '<button v-bind:disabled="disabled" v-on:click="button_update" class="letter-button">{{letter.text}}</button>',
@@ -53,7 +53,6 @@ Vue.component('letter-button', {
             this.disabled = true;
         }
     },
-
     created: function(){
         /* Event listeners (uses parent as event bus) */
         this.$parent.$on('start-button', this.restart);
@@ -65,7 +64,7 @@ Vue.component('letter-display', {
     props: ['letter'],
     template: '<div class="word-display">{{letter.text == 32 ? " " : letter.text}}</div>'
 });
-
+/* ------ MAIN APP: The game ------ */
 var game = new Vue ({
     el: "#game",
     data: {
@@ -159,17 +158,16 @@ var game = new Vue ({
         }
     },
     created: function() {
+        const LETTERS_IN_ALPHABET = 26;
+        const FIRST_LETTER_CODE = "A".charCodeAt(0);
         this.triesLeft = this.MAX_TRIES;
         this.imageDisplay = this.listHangmanImgs[0];
+        /* game will have a letter component for each english alphabet letter */
+        for(var i = 0; i < LETTERS_IN_ALPHABET; ++i) {
+            this.letterList.push({id:i, text:String.fromCharCode(FIRST_LETTER_CODE+i), disabled:false});
+        }
         /* Event listeners (game is used as event bus by children) */
         this.$on('letter-input', this.check_letter);
     }
 });
-
-const LETTERS_IN_ALPHABET = 26;
-const FIRST_LETTER_CODE = 65;
-for(var i = 0; i < LETTERS_IN_ALPHABET; ++i) {
-    game.letterList.push({id:i, text:String.fromCharCode(FIRST_LETTER_CODE+i), disabled:false});
-}
-
 };
