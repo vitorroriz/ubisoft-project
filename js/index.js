@@ -101,7 +101,7 @@ var game = new Vue ({
             this.clear_display();
             for(var i = 0; i < this.wordToGuess.length; i++) {
                 if(this.wordToGuess.charAt(i) == " ")
-                    Vue.set(this.displayVector, i, {id:'dv'+i, text:32});
+                    Vue.set(this.displayVector, i, {id:'dv'+i, text:' '});
                 else
                     Vue.set(this.displayVector, i, {id:'dv'+i, text:'?'});
             }
@@ -144,7 +144,7 @@ var game = new Vue ({
         },
         reveal_letter: function(indices, letter) {
             for(var i = 0; i < indices.length; i++) {
-                Vue.set(this.displayVector, [indices[i]], {id:'dv'+indices[i], text:letter});
+                Vue.set(this.displayVector[indices[i]], 'text', letter);
             }
         },
         get_random_word: function() {
@@ -156,7 +156,7 @@ var game = new Vue ({
         },
         reveal_word: function() {
             for (let index = 0; index < this.wordToGuess.length; index++) {
-                Vue.set(this.displayVector, index, {id:'dv'+index, text:this.wordToGuess.charAt(index).toUpperCase()});
+                Vue.set(this.displayVector[index], 'text', this.wordToGuess.charAt(index).toUpperCase());
             }
         }
     },
