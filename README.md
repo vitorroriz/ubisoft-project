@@ -1,9 +1,9 @@
 # hangubi
-A hangman game based on Ubisoft Blue Byte list of games.
+A hangman game based on a list of games from Ubisoft Blue Byte (Ubisoft Dusseldorf).
 
-By playing the classic hangman game, you have to reveal names of games that Ubisoft Blue Byte (Ubisoft Dusseldorf) created or help to develop.
+This project was created so I can learn some HTML/CSS/JS/VUE.
 
-This project was created to help me learn HTML/CSS/JS/VUE.
+By playing the classic hangman game, you have to reveal names of games that Ubisoft Blue Byte (Ubisoft Dusseldorf) created or helped to develop.
 
 
 - HOW TO PLAY: 
@@ -11,7 +11,7 @@ This project was created to help me learn HTML/CSS/JS/VUE.
 	- open the file ubisoft-project/index.html in a browser
 	- Have fun and don't let the man to hang!
 
-- Resources:
+- RESOURCES:
 	- Tutorials:
 		- HTML/CSS/Javascript tutorial: https://www.freecodecamp.org/learn
 		- VUE tutorial: https://vuejs.org/v2/guide/index.html
