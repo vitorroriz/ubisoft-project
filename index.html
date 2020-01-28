@@ -7,7 +7,6 @@
     <link async href="css/styles.css" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css"/>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="js/index.js" type="text/javascript"></script>
-
 </head>
 <body>
 <div id=content>
@@ -29,6 +28,7 @@
             v-bind:letter="item"
             v-bind:key="item.id"></letter-display>
         <div v-bind:class="resultClass">{{resultMsg}}</div>
+        <button class="button" v-show="showRevealButton" v-on:click="reveal_word">Reveal Game</button>
     </div>
     <footer>
         &copy; Vitor Roriz  

@@ -1,6 +1,6 @@
-#start-button {
+.button {
     margin-top: 20px;
-    border-radius: 10%;
+    border-radius: 8%;
     font-size: 30px;
     height: auto;
     font-family: monospace;

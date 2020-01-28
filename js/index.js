@@ -32,7 +32,7 @@ Vue.component('letter-button', {
     props: ['letter'],
     template: '<button v-bind:disabled="disabled" v-on:click="button_update" class="letter-button">{{letter.text}}</button>',
     /* data has to be a function in component, so each instance of the 
-     * componente can have its own returned data
+     * component can have its own returned data
      */
     data: function() {
         return {
@@ -43,7 +43,6 @@ Vue.component('letter-button', {
     methods: {
         button_update: function() {
             this.disabled = true;
-            //game.check_letter(this.letterVal);
             this.$parent.$emit('letter-input', this.letterVal);
         },
         restart: function() {
@@ -79,6 +78,7 @@ var game = new Vue ({
         imageDisplay:"sinit.png",
         resultClass:"",
         resultMsg:"",
+        showRevealButton:false,
         wordsList: [
             "battle isle",
             "incubation",
@@ -108,6 +108,7 @@ var game = new Vue ({
             this.triesLeft = this.MAX_TRIES;
             this.imageDisplay = this.listHangmanImgs[0];
             this.resultMsg = "";
+            this.showRevealButton = false;
             this.$emit('start-button');
         },
         button_update: function(letter) {
@@ -119,7 +120,6 @@ var game = new Vue ({
                 this.reveal_letter(indices, guess);
                 this.nLettersLeftToWin--;
                 if(this.nLettersLeftToWin <= 0) {
-                    //user has won the game
                     this.game_won();
                 }
             } else {
@@ -132,14 +132,12 @@ var game = new Vue ({
             }
         },
         game_over: function() {
-            console.log("game over!");
-            //this.clear_display();
             this.resultClass = "result-gameover";
             this.resultMsg = "GAME OVER!";
+            this.showRevealButton = true;
             this.$emit('game-over');
         },
         game_won: function() {
-            console.log("you won!!!!")
             this.resultClass = "result-gamewon";
             this.resultMsg = "YOU WON!";
             this.$emit('game-over');
@@ -149,12 +147,17 @@ var game = new Vue ({
                 Vue.set(this.displayVector, [indices[i]], {id:'dv'+indices[i], text:letter});
             }
         },
-        get_random_word() {
+        get_random_word: function() {
             var index = Math.floor((Math.random() * this.wordsList.length));
             return this.wordsList[index];
         },
-        clear_display() {
+        clear_display: function() {
             this.displayVector.splice(0, this.displayVector.length);
+        },
+        reveal_word: function() {
+            for (let index = 0; index < this.wordToGuess.length; index++) {
+                Vue.set(this.displayVector, index, {id:'dv'+index, text:this.wordToGuess.charAt(index).toUpperCase()});
+            }
         }
     },
     created: function() {
