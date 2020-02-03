@@ -4,6 +4,7 @@ This project was created so I can learn some HTML/CSS/JS/VUE.
 
 By playing the classic hangman game, you have to reveal names of games that Ubisoft Blue Byte (Ubisoft Dusseldorf) created or helped to develop.
 
+![game_screenshot](/img/screenshot.png)[Game screenshot](url)
 
 - HOW TO PLAY: 
 	- Clone this repo (git clone https://github.com/vitorroriz/ubisoft-project)
