@@ -1,6 +1,6 @@
 # hangubi
 
-This project was created so I can learn some HTML/CSS/JS/VUE.
+This project was created so I can learn some VUE.
 
 By playing the classic hangman game, you have to reveal names of games that Ubisoft Blue Byte (Ubisoft Dusseldorf) created or helped to develop.
 
