@@ -13,7 +13,6 @@ By playing the classic hangman game, you have to reveal names of games that Ubis
 
 - RESOURCES:
 	- Tutorials:
-		- HTML/CSS/Javascript tutorial: https://www.freecodecamp.org/learn
 		- VUE tutorial: https://vuejs.org/v2/guide/index.html
 	- Data and media:
 		- list of games from: https://en.wikipedia.org/wiki/Ubisoft_Blue_Byte
